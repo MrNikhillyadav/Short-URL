@@ -1,0 +1,22 @@
+SetUp : 
+    - npm init
+    - npm i express : for server building
+    - npm i mongoose : to connect to database.
+
+    index.js file
+
+    Make folders:
+        -routes
+            url.js
+        -models
+            url.js
+        -controllers
+            url.js (async function hota h isme)
+
+    install nonoid from web
+        npm i nanoid
+
+    
+    
+        
+        
