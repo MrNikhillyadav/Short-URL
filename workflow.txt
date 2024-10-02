@@ -16,6 +16,13 @@ SetUp :
     install nonoid from web
         npm i nanoid
 
+
+---------------------------------------------------------
+/ server-side rendering  engines : EJS, PUG etc.
+    npm i EJS
+    
+
+
     
     
         
