@@ -22,10 +22,12 @@
               </form>
       
               <% if (locals.id) { %>
-                <p>URL Generated : localhost:8001/url/<%= id %></p>
+                <p>URL Generated : http://localhost:8001/url/<%= id %></p>
               <% } %>
 
         </div>
+
+        
         <div>
           <% if (locals.allURLs) { %>
             <table>

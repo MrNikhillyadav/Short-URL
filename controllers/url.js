@@ -11,6 +11,7 @@ async function handleGenerateNewShortURL(req, res) {
     shortId: shortID,
     redirectURL: body.url,
     visitHistory: [],
+    creadteBy : req.user._id, 
   });
 
   return res.render('home', {
@@ -39,6 +40,9 @@ async function handleGetShortURL(req, res) {
                 timestamp : Date.now(),
             },
         }});
+        
+        if(!entry) return res.status(404).json({ error: "Short URL not found  " });
+
 
         res.redirect(entry.redirectURL);
 }
