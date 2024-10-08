@@ -24,11 +24,11 @@ async function handleUserLogin(req,res) {
             }
         );
     }
-    const sessionId  = uuidv4();   // random token no. generate hua
+    const sessionId  = uuidv4();        // random token no. generate hua
 
-    setUser(sessionId, user);     // e.g. parking wala Dairy me user ka name aur usko konsa taken no. assign kia, details store  kar lega.
+    setUser(sessionId, user);     // -> ye state server store krta h as session || e.g. parking wala Dairy me user ka name aur usko konsa taken no. assign kia, likh leta h.|
 
-    res.cookie('uid', sessionId)  //  cookie set hua, user ko cookie mil jayega (having  token no.)
+    res.cookie('uid', sessionId)    //-> user k pass chale jata h  || cookie set hua, user ko cookie mil jayega (having  token no.)
 
     
     return res.redirect('/')

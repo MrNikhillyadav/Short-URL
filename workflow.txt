@@ -127,7 +127,32 @@ Authentication Workflow:
         -   use req.user._id to get the id of the user associated with the request.
         -   use mongoose.model('user').findById(req.user._id) to get the user object.
         
-       
+       PROBLEM IN STATEFULL Authentication
+            Problem 1 - Every time server restarts, user gets logged  out.
+            Problem 2 - It is memory intensive  and can be a bottleneck in high traffic applications.
+            Problem 3 - It is not scalable.
+
+
+9.       To solve this, we use STATELESS  Authentication.
+        
+            - Unlike statefull , Stateless Authentication don't maintain a state on the server.
+            - User aayega, PAYLOAD/data dega, server TOKEN generate krega.
+            - server stores the user PAYLOAD, and the STATE in that TOKEN itself and locks it.
+            - this token will go to the server with each request, to keep you logged In.
+
+    REMEMBER:    
+        In Statefull Authentication, server stores the user Payload using sessions.
+        In Stateless Authentication, tokens ko generate krte hain to store user's Payload.
+
+    - Install  jsonwebtoken package
+        - npm i jsonwebtoken
+
+
+
+
+
+
+
     
 
 

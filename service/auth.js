@@ -1,4 +1,4 @@
-const sessionIdToUseMap = new Map();
+const sessionIdToUseMap = new Map();  // user state and payload(name,password) store krne k liye h.
 
 function setUser(id, user) {
   sessionIdToUseMap.set(id, user);
