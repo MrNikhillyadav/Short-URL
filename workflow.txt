@@ -144,8 +144,72 @@ Authentication Workflow:
         In Statefull Authentication, server stores the user Payload using sessions.
         In Stateless Authentication, tokens ko generate krte hain to store user's Payload.
 
-    - Install  jsonwebtoken package
+--------------------------------------------------------------------------------------------------------------
+
+10 . Implementing stateless Authentication:
+        
         - npm i jsonwebtoken
+        - remove the map as we don't need to store the payload anymore.
+
+        - In service/auth.js file  
+            - require the jsonwebtoken as jwt.
+            - Modify setUser function
+                - add const payload object and return jwt.sign(payload,secretkey) | or directly pass the whole user to jwt.sign() function.
+            - create this secretkey also to pass.
+            ( secretkey == Stamp | Jiske pass ye secretkey hogi mtlab vo namara token bana skta h.)
+
+Important Points to Remember regarding JWT Authentication :
+    - user server pr  request krta h & gives username and password to authenticate himself.
+    - server DB k pass le jata h data, and if its present,
+    - server generates a new token,
+    - ab hum user ka jo bhi data h(i.e.payload) token me daal dete hain 
+    
+    Now server ki responsibility h is token ko client tak secure way me handover krna.
+        - Two methods for this :
+            via cookies
+            via response.
+
+        1. via Cookie
+            - remember cookies hamesha server hi banata hain,
+            - hum token ko cookie me daal kr user ko send kr dete h.
+            - browser ka default behaviour hota h cookie ko store krleta h.
+
+            - Phir user koi bhi request krta h get|post etc. server pr , browser cookies saath me bhejega.
+            - server check krta h ki user k pass koi uid name ki cookie hain?  
+            - agar uid naam ki cookie hi nahi h means user is logged out.
+            - if cookie is available, server token ki value nikaal lega to validate.
+            - token me user info already hain hi, uss se hum logged in user ka naam pata laga skte hain.
+
+            Important fact about cookie:
+            - cookie is a browser feature, isko mobile pr use nahi kr skte.
+
+            - cookies is domain specifi.
+                - like fb login kia, browser got fb cookie.
+                - now user na kisi server pr login kia and phir request kiya, 
+                  to us server pr to fb cookie bhi local cookies k saath chali jaayegi! ? 
+
+                - But aise nahi hota h, cookie ek specific domain pr hi jaati hai. like: localhost/, jwt.io/ , www.piyushgarg.com/ etc.
+
+        2. via response
+            - res.json({token}) se Mobile device pr token send kr dete h.
+            - now mobile device pr token store krna pdta hai. 
+            - unlike browser, yaha hume token khud server ko bhejna pdega with each request. 
+            - Token is send to server via Header named 'AUTHORIZATION'.
+                Authorization : Beared <Token>.
+            - To validate the token,
+                - use req.headers["Authorization"] instead of req.cookies.
+                - It will give you : Beared <Token>.
+                - To get the token, use req.headers[" authorization"].split("Beared")[1].
+                - .Spit will create an array : [" ', 4845555.....etc.]
+                - It will give you the value of TOKEN present at 1 Index in array.
+                
+                Validate using Postman, by sending Data from frontend.
+
+            Refer : Piyush gard Video : At 23 Min.
+
+======================================================================================================================================================
+
+
 
 
 

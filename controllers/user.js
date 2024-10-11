@@ -1,5 +1,5 @@
 const User = require('../models/user');
-const { v4:uuidv4 } = require('uuid');
+// const { v4:uuidv4 } = require('uuid');
 const {setUser} = require('../service/auth')
 
 
@@ -24,13 +24,10 @@ async function handleUserLogin(req,res) {
             }
         );
     }
-    const sessionId  = uuidv4();        // random token no. generate hua
 
-    setUser(sessionId, user);     // -> ye state server store krta h as session || e.g. parking wala Dairy me user ka name aur usko konsa taken no. assign kia, likh leta h.|
+    const token = setUser( user);    // setUser() hume token return krega, use token variable  me store kr lenge.
+    res.cookie('uid', token);
 
-    res.cookie('uid', sessionId)    //-> user k pass chale jata h  || cookie set hua, user ko cookie mil jayega (having  token no.)
-
-    
     return res.redirect('/')
 }
 
