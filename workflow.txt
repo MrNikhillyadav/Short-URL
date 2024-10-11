@@ -183,12 +183,14 @@ Important Points to Remember regarding JWT Authentication :
             Important fact about cookie:
             - cookie is a browser feature, isko mobile pr use nahi kr skte.
 
-            - cookies is domain specifi.
+            - cookies is domain specific.
                 - like fb login kia, browser got fb cookie.
                 - now user na kisi server pr login kia and phir request kiya, 
                   to us server pr to fb cookie bhi local cookies k saath chali jaayegi! ? 
 
                 - But aise nahi hota h, cookie ek specific domain pr hi jaati hai. like: localhost/, jwt.io/ , www.piyushgarg.com/ etc.
+
+ 
 
         2. via response
             - res.json({token}) se Mobile device pr token send kr dete h.
@@ -196,20 +198,42 @@ Important Points to Remember regarding JWT Authentication :
             - unlike browser, yaha hume token khud server ko bhejna pdega with each request. 
             - Token is send to server via Header named 'AUTHORIZATION'.
                 Authorization : Beared <Token>.
-            - To validate the token,
-                - use req.headers["Authorization"] instead of req.cookies.
-                - It will give you : Beared <Token>.
-                - To get the token, use req.headers[" authorization"].split("Beared")[1].
-                - .Spit will create an array : [" ', 4845555.....etc.]
-                - It will give you the value of TOKEN present at 1 Index in array.
+AUTHORIZATION: 
+            - To validate the token, In middleware/Auth.js  file:
+                - use req.headers["Authorization"] to check if we have Authorization Header value or not, also set req.user = null.
+
+                    const authorizationHeaderValue = req.headers["Authorization "];
+                    if(! authorizationHeaderValue || authorizationHeaderValue.startsWith("Bearer"){return next()});
+                
+                - if we get the value available, 
+
+                    - It will be in format : Beared <Token>.
+                    - To get the token, use : authorizationHeaderValue.split("Bearer")[1] and save it in variable 'token'.
+                    - .Spit will create an array : [" ', 4845555.....etc.]
+                    - It will give you the value of TOKEN present at 1 Index in array.
+
+                    - call getUser(token).
+                    - req.user = user,
+                    - next()
                 
                 Validate using Postman, by sending Data from frontend.
 
             Refer : Piyush gard Video : At 23 Min.
 
+ Proceed with Authorization : 
+
+        - make a middleware function restrictToRole() ....like for Admin, user etc.
+
+        some functions used: 
+            - startsWith()
+            - .Spit()
+            - restrictTo()
+
+        WATCH AUTHORIZATION VIDEO 20 MINS.
+
 ======================================================================================================================================================
 
-
+Build : Discord Bot.
 
 
 
